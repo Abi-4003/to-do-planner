@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tint.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <title>To-Do Planner</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            background-image: url('dm.jpg');
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: ;
+        }
+
+        .container {
+                width:80%; 
+                height:auto;
+                margin:10px auto; 
+                min-height:200px; 
+                padding:30px; 
+                background:transparent;
+                border:2px solid #e6b7eca1;
+                border-radius:10px;
+                backdrop-filter:blur(400px);
+         }
+         .container:hover{
+                background-color:#e6b7eca1;
+         }
+
+         h1 {
+             color:#e6b7eca1;#eee
+             text-align:center;
+             margin-bottom;
+         }
+         .h1:hover{ 
+                  backgrounf-color:#e6b7eca1;
+         }
+
+         #taskInput,
+         #categoryInput,
+         #dueDateInput,
+         #addTask {
+                  background-color:transparent;#e6b7eca1#007BFF
+                  border: 2px solid #e6b7eca1; /* Set a 2px solid border with the specified color */
+                  border-radius: 10px; /* Optional: Add border radius for a rounded appearance */
+                  padding: 10px 20PX; /* Optional: Add padding for better aesthetics */
+                  cursor: pointer;
+                  margin-right: 10px; /* Optional: Add margin for spacing */
+                  backdrop-filter:blur(100px);
+         }
+         
+         .#addTask:hover{
+                        background-color:#e6b7eca1;
+         }
+
+
+         ul {
+                   list-style: none;
+                   padding: 0;
+         }
+
+         li {
+             width:80%; 
+             background-color: transaparent;
+             padding: 10px;
+             border: 2px solid #e6b7eca1
+             cursor: pointer;
+             margin-right: 10px auto;
+             border-radius: 10px;
+             
+             backdrop-filter:blur(100px);
+          }
+          li:hover{
+                   background-color:#e6b7eca;
+          }
+          
+
+          .completed {
+                text-decoration: line-through;
+          }
+
+           .editButton, .deleteButton, .renameButton {
+                                   
+                                   background-color:#321f4d; 
+                                   border: 2px solid #e6b7eca1
+                                   margin:10px auto;
+                                   
+                                   min-height:10px;
+                                   color:#e6b7eca1; 
+                                   border-radius:10px;
+                                   padding:7px 15px; 
+                                   cursor:pointer; 
+                                   transition:all 0.2s ease;
+                                   backdrop-filter:blur(400px)
+
+          }
+          .editButton:hover, .deleteButton:hover, .renameButton:hover{ 
+                                                border-radius:5px; 
+                                                background-color:#e6b7eca1;
+          }
+       
+                  
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do Planner</h1>
+        <div class="input-container">
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+
+        <input type="text" id="categoryInput" placeholder="Category">
+        <input type="date" id="dueDateInput">
+        <button id="addTask">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const categoryInput = document.getElementById('categoryInput');
+        const dueDateInput = document.getElementById('dueDateInput');
+        const addTaskButton = document.getElementById('addTask');
+        const taskList = document.getElementById('taskList');
+
+        function createTaskElement(taskText, categoryText, dueDate) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<strong>${categoryText}</strong> - ${taskText} (Due: ${dueDate})`;
+
+            // Create a "Dots" menu
+            const dotsMenu = document.createElement('div');
+            dotsMenu.classList.add('dots-menu');
+
+            // Create an "Edit" option
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.classList.add('editButton');
+            dotsMenu.appendChild(editButton);
+
+            // Create a "Delete" option
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('deleteButton');
+            dotsMenu.appendChild(deleteButton);
+
+            // Create a "Rename" option
+            const renameButton = document.createElement('button');
+            renameButton.textContent = 'Rename';
+            renameButton.classList.add('renameButton');
+            dotsMenu.appendChild(renameButton);
+
+            listItem.appendChild(dotsMenu);
+
+            // Event listener for editing a task
+            editButton.addEventListener('click', function() {
+                const newText = prompt('Edit the task:', taskText);
+                if (newText !== null) {
+                    taskText = newText;
+                    listItem.innerHTML = `<strong>${categoryText}</strong> - ${taskText} (Due: ${dueDate})`;
+                    listItem.appendChild(dotsMenu);
+                }
+            });
+
+            // Event listener for deleting a task
+            deleteButton.addEventListener('click', function() {
+                taskList.removeChild(listItem);
+            });
+
+            // Event listener for renaming a task
+            renameButton.addEventListener('click', function() {
+                const newTaskText = prompt('Rename the task:', taskText);
+                if (newTaskText !== null) {
+                    taskText = newTaskText;
+                    listItem.innerHTML = `<strong>${categoryText}</strong> - ${taskText} (Due: ${dueDate})`;
+                    listItem.appendChild(dotsMenu);
+                }
+            });
+
+            return listItem;
+        }
+
+        addTaskButton.addEventListener('click', function() {
+            const taskText = taskInput.value.trim();
+            const categoryText = categoryInput.value.trim();
+            const dueDate = dueDateInput.value;
+
+            if (taskText !== '') {
+                const listItem = createTaskElement(taskText, categoryText, dueDate);
+
+                taskList.appendChild(listItem);
+                taskInput.value = '';
+                categoryInput.value = '';
+                dueDateInput.value = '';
+
+                listItem.addEventListener('click', function() {
+                    listItem.classList.toggle('completed');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

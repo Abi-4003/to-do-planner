@@ -1,0 +1,105 @@
+<!-- create_account.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            background-image: url('log.jpg');
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+                width:80%; 
+                height:auto;
+                margin:10px auto; 
+                min-height:200px;
+                padding:30px; 
+                background:transparent;
+                border:2px solid #e6b7eca1;
+                border-radius:10px;
+                backdrop-filter:blur(400px);
+         }
+         .container:hover{
+                background-color:#e6b7eca1;
+         }
+         
+
+        .h1 {
+            margin-bottom: 20px;
+        }
+
+        #usernameDisplay {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        #successMessage {
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #e6b7eca1;
+            color:#fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Your Generated Username:</h1>
+    <p id="usernameDisplay"></p>
+    <p id="successMessage"></p>
+
+    <button onclick="okGotIt()">OK, Got It</button>
+    <button onclick="cancel()">Cancel</button>
+    </div>
+
+    <script>
+        // Function to generate a random username
+        function generateUsername() {
+            const randomSuffix = Math.floor(Math.random() * 1000);
+            return `user_${randomSuffix}`;
+        }
+
+        // Function to display the generated username
+        function displayUsername() {
+            const usernameDisplay = document.getElementById('usernameDisplay');
+            const generatedUsername = generateUsername();
+            usernameDisplay.textContent = generatedUsername;
+            return generatedUsername;
+        }
+
+        // Function to handle "OK, Got It" button click
+        function okGotIt() {
+            const generatedUsername = displayUsername();
+            const successMessage = document.getElementById('successMessage');
+            successMessage.textContent = `Successfully created account for ${generatedUsername}. Redirecting to Login Page...`;
+            window.location.href = "tint.html";
+        }
+
+        // Function to handle "Cancel" button click
+        function cancel() {
+            alert('Account creation canceled. Redirecting to Login Page...');
+            window.location.href = "tint.html";
+        }
+
+        // Call the function to generate and display the username when the page loads
+        window.onload = displayUsername;
+    </script>
+</body>
+</html>

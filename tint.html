@@ -1,0 +1,134 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            background-image: url('doo.jpg');
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 120vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size:cover;
+        }
+        container {
+                width:80%; 
+                height:auto;
+                margin:10px auto; 
+                min-height:200px;
+                padding:30px; 
+                background:transparent;
+                border:2px solid #880e4f;#e6b7eca1
+                border-radius:10px;
+                backdrop-filter:blur(400px);
+         }
+         .container:hover{
+                background-color:#e6b7eca1;
+         }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1{ 
+            color:#880e4f;
+        }
+
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        button{
+            background-color:#880e4f; #007BFF
+            color:;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button:hover{ 
+                   border-radius:5px; 
+                   background-color:#e6b7eca1;
+        }
+    </style>
+</head>
+<body>
+    
+    <form>
+        <div class="container">
+        <h1>TO DO PLANNER</h1>
+        
+        <label for="username">Username:</label>
+       
+        <input type="text" id="username" name="username" required>
+        
+        
+        <label for="password">Password:</label>
+        
+        <input type="password" id="password" name="password" required>
+       
+        <label for="sumInput">2 + 2 ?:</label>
+       
+        <input type="text" id="sumInput" placeholder="Enter the sum">
+        
+        <button type="button" onclick="goToCreateAccount()">Create Account</button>
+        
+        <!-- Add a link to the to-do planner page -->
+        <a href="diho.html"></a>
+        
+        <button type="button" onclick="login()">Login</button>
+        
+      </div>
+
+
+
+
+    </form>
+        <script>
+            function login() {
+            // Hardcoded sum of two numbers as the password
+            const validSum = 4; // For example, 2 + 2
+
+            // Get the entered sum from the input box
+            const enteredSum = parseInt(document.getElementById('sumInput').value);
+
+            // Check if the entered sum is valid
+            if (!isNaN(enteredSum) && enteredSum === validSum) {
+                alert('Login successful! Redirecting to To-Do Planner...');
+                // Redirect to the To-Do Planner page
+                window.location.href = "diho.html";
+            } else {
+                alert('Invalid details. Please try again.');
+            }
+        }
+
+        // Function to handle the "Create Account" button click
+        function goToCreateAccount() {
+            // Redirect to the Create Account Page
+            window.location.href = "as.html";
+        }
+
+        </script>
+             
+  
+</body>
+</html>
